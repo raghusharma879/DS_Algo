@@ -2,6 +2,7 @@ package com.BinaryTree;
 
 import java.util.LinkedList;
 import java.util.Queue;
+import java.util.Stack;
 
 public class BinaryTreeLinkedList {
 
@@ -143,31 +144,104 @@ public class BinaryTreeLinkedList {
 		}
 	}
 
-	public void inOrder(BinaryNode node) {
+	public void inOrderRecursive(BinaryNode node) {
 		if (node == null) {
 			return;
 		}
-		inOrder(node.getLeftChild());
+		inOrderRecursive(node.getLeftChild());
 		System.out.print(node.getValue() + " ");
-		inOrder(node.getRightChild());
+		inOrderRecursive(node.getRightChild());
 	}
+	
+	public void inOrder() {
+		Stack<BinaryNode> s = new Stack<>();
+		BinaryNode currentNode = root;
+		while(currentNode!=null || s.size()>0) {
+			while(currentNode!=null) {
+				s.push(currentNode);
+				currentNode = currentNode.getLeftChild();
+			} 
+			
+			currentNode = s.pop();
+			System.out.print(currentNode.getValue()+" ");
+			currentNode = currentNode.getRightChild();
+		}
+	}
+	
+	public void inOrder2() {
+		Stack<BinaryNode> s = new Stack<>();
+		BinaryNode leftTemp = root;
+		BinaryNode rightTemp = root;
+		
+		while(rightTemp!=null) {
+			s.push(rightTemp.getRightChild());
+			rightTemp=rightTemp.getRightChild();
+		}
+		s.push(root);
+		while(leftTemp!=null) {
+			s.push(leftTemp.getLeftChild());
+			leftTemp=leftTemp.getLeftChild();
+		}
+		while(s.size()>0) {
+			BinaryNode node = s.pop();
+			if(node!=null)
+				System.out.print(node.getValue()+" ");
+		}
+		
+	}
+	
+	
 
-	public void preOrder(BinaryNode node) {
+	public void preOrderRecursive(BinaryNode node) {
 		if (node == null) {
 			return;
 		}
 		System.out.println(node.getValue());
-		preOrder(node.getLeftChild());
-		preOrder(node.getRightChild());
+		preOrderRecursive(node.getLeftChild());
+		preOrderRecursive(node.getRightChild());
 	}
 
-	public void postOrder(BinaryNode node) {
+	public void preOrder() {
+		Stack<BinaryNode> s = new Stack<>();
+		s.push(root);
+		while(s.size()>0) {
+			BinaryNode temp = s.pop();
+			if(temp !=null)
+			System.out.print(temp.getValue());
+			if(temp!=null) {
+				s.push(temp.getRightChild());
+				s.push(temp.getLeftChild());
+			}
+			
+		}
+	}
+	public void postOrderRecursive(BinaryNode node) {
 		if (node == null) {
 			return;
 		}
-		postOrder(node.getLeftChild());
-		postOrder(node.getRightChild());
+		postOrderRecursive(node.getLeftChild());
+		postOrderRecursive(node.getRightChild());
 		System.out.println(node.getValue());
+	}
+	
+	public void postOrder() {
+		Stack<BinaryNode> s = new Stack<>();
+		BinaryNode rightTemp = root;
+		BinaryNode leftTemp = root;
+		while(rightTemp!=null) {
+			s.push(rightTemp.getRightChild());
+			rightTemp=rightTemp.getRightChild();
+		}
+		while(leftTemp!=null) {
+			s.push(leftTemp.getLeftChild());
+			leftTemp=leftTemp.getLeftChild();
+		}
+		while(s.size()>0) {
+			BinaryNode node = s.pop();
+			if(node!=null)
+			System.out.print(node.getValue()+" ");
+		}
+		System.out.print(root.getValue());
 	}
 
 	public void deleteTree() {
