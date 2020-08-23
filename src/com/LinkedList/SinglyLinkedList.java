@@ -141,4 +141,21 @@ public class SinglyLinkedList {
 		}
 		System.out.println("Failed! Could not find");
 	}
+	
+	public SingleNode get(int value) {
+		if(head==null) {
+			System.out.println("Failed! List is Empty");
+			return null;
+		}
+		SingleNode temp = head;
+		for(int i=0;i<getSize();i++) {
+			if(temp.getValue()==value) {
+				System.out.println("Success! Found at location_"+i);
+				return temp;
+			}
+			temp=temp.getNext();
+		}
+		System.out.println("Failed! Could not find");
+		return null;
+	}
 }
