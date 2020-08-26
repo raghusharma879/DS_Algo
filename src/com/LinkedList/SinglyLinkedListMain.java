@@ -11,12 +11,16 @@ public class SinglyLinkedListMain {
 		sll.addLast(6);
 		sll.add(12, 1);
 		sll.traverseList();
-		sll.delete(1);
+		//SingleNode n = sll.reverse(sll.get(2));
+		//sll.reverseRecursively();
+		sll.reverse();
 		sll.traverseList();
-		sll.deleteFirst();
-		sll.traverseList();
-		sll.deleteLast();
-		sll.traverseList();
-		sll.search(8);
+//		sll.delete(1);
+//		sll.traverseList();
+//		sll.deleteFirst();
+//		sll.traverseList();
+//		sll.deleteLast();
+//		sll.traverseList();
+//		sll.search(8);
 	}
 }

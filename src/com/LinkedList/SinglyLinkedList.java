@@ -158,4 +158,32 @@ public class SinglyLinkedList {
 		System.out.println("Failed! Could not find");
 		return null;
 	}
+	public void reverseRecursively() {
+		head = reverseRecursively(head);
+	}
+	private SingleNode reverseRecursively(SingleNode head) {
+		if(head == null || head.getNext()==null) {
+			return head;
+		}
+		SingleNode newHead = reverseRecursively(head.getNext());
+		head.getNext().setNext(head);
+		head.setNext(null);
+		return newHead;
+	}
+	
+	public void reverse() {
+		SingleNode curr = head;
+		SingleNode prev=null;
+		SingleNode next=null;
+		while(curr!=null) {
+			next=curr.getNext();
+			curr.getNext().setNext(curr);
+			curr.setNext(prev);
+			prev=curr;
+			curr=next;
+					
+		}
+	
+		head = curr;
+	}
 }
